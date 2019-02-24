@@ -1,11 +1,15 @@
 package com.pradeep.microservice.models;
 
-public class RatingData {
+public class Rating {
 
 	private String movieId;
 	private int rating;
 
-	public RatingData(String movieId, int rating) {
+	public Rating() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Rating(String movieId, int rating) {
 		super();
 		this.movieId = movieId;
 		this.rating = rating;
