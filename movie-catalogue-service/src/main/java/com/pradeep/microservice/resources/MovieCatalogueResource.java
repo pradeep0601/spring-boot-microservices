@@ -1,6 +1,5 @@
 package com.pradeep.microservice.resources;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,8 +20,11 @@ import com.pradeep.microservice.models.UserRating;
 @RequestMapping("/catalogue")
 public class MovieCatalogueResource {
 
-	private static final String MOVIE_INFO_BASE_URL = "http://localhost:8083/movies/";
-	private static final String RATINGS_DATA_BASE_URL = "http://localhost:8084/ratings/";
+//	private static final String MOVIE_INFO_BASE_URL = "http://localhost:8083/movies/";
+//	private static final String RATINGS_DATA_BASE_URL = "http://localhost:8084/ratings/";
+
+	private static final String MOVIE_INFO_BASE_URL = "http://movie-info-service/movies/";
+	private static final String RATINGS_DATA_BASE_URL = "http://ratings-data-service/ratings/";
 
 	@Autowired
 	RestTemplate restTemplate;
@@ -34,7 +36,7 @@ public class MovieCatalogueResource {
 	public List<MovieCatalogueItem> getMovieCatalogue(@PathVariable("userId") String userId) {
 		UserRating userRating = restTemplate.getForObject(RATINGS_DATA_BASE_URL + "user/" + userId, UserRating.class);
 		List<Rating> ratings = userRating.getRatings();
-		
+
 		return ratings.stream().map(rating -> {
 			Movie movie = restTemplate.getForObject(MOVIE_INFO_BASE_URL + rating.getMovieId(), Movie.class);
 			return new MovieCatalogueItem(movie.getName(), movie.getDescription(), rating.getRating());
