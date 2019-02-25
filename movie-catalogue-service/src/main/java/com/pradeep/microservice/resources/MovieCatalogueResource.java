@@ -29,8 +29,10 @@ public class MovieCatalogueResource {
 	@Autowired
 	RestTemplate restTemplate;
 
-	@Autowired
-	WebClient.Builder webClientBuilder;
+	// configuration for WebClient
+	/*
+	 * @Autowired WebClient.Builder webClientBuilder;
+	 */
 
 	@GetMapping("/{userId}")
 	public List<MovieCatalogueItem> getMovieCatalogue(@PathVariable("userId") String userId) {
@@ -44,6 +46,7 @@ public class MovieCatalogueResource {
 	}
 }
 
+// configuration for WebClient
 /*
  * String movieUri = MOVIE_INFO_BASE_URL + ratingData.getMovieId(); Movie movie
  * = webClientBuilder.build() .get() .uri(movieUri) .retrieve()
